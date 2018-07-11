@@ -8,6 +8,7 @@
 	<artifactId>db-spring-auth</artifactId>
 	<version>0.1.0</version>
 	<!-- To jest zmiana Darka -->
+	<!-- To jest zmiana Darka 3 -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
