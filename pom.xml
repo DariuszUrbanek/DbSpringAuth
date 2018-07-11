@@ -9,6 +9,7 @@
 	<version>0.1.0</version>
 	<!-- To jest zmiana Darka -->
 	<!-- To jest zmiana Darka 3 -->
+	<!-- To jest zmiana Krzyśka v4.0 -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -16,6 +17,7 @@
 	</parent>
 	<!-- To jest zmiana Krzyśka v3.0 -->
 	<!-- To jest zmiana Darka 2 -->
+	<!-- To jest zmiana Krzyśka v5.0 -->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
