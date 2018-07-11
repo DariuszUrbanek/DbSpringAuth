@@ -8,12 +8,15 @@
 	<artifactId>db-spring-auth</artifactId>
 	<version>0.1.0</version>
 
+	<!-- To jest zmiana Darka -->
+	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.0.1.RELEASE</version>
 	</parent>
 	<!-- To jest zmiana Krzyśka -->
+	<!-- To jest zmiana Darka 2 -->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
