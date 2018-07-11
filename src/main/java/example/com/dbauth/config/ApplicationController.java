@@ -121,7 +121,6 @@ public class ApplicationController {
 		}
 
 		if (!form.getPassword().equals(form.getPasswordRepeated())) {
-//			result.addError(new ObjectError("passwordRepeated","Nonidentical passwords were entered!"));
 			model.addAttribute("register", form);
 			return "register";
 		}
