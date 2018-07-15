@@ -1,4 +1,4 @@
-package example.com.dbauth.config;
+package example.com.dbauth.controller;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -45,7 +45,7 @@ public class ApplicationController {
 	@Autowired
 	DaoAuthenticationProvider authProvider;
 
-	@RequestMapping(value = { "/", "login", "login/{message}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/login", "/login/{message}" }, method = RequestMethod.GET)
 	public String loginGet(Model model, @PathVariable(required = false) String message) {
 		if (message != null && !message.isEmpty())
 			switch (message) {
@@ -65,7 +65,7 @@ public class ApplicationController {
 		return "login";
 	}
 
-	@RequestMapping(value = { "login" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
 	public String loginPost(@ModelAttribute UserDataForm login, BindingResult result) {
 
 		if (result.hasErrors())
@@ -85,12 +85,12 @@ public class ApplicationController {
 				return "redirect:/employeeSearch";
 			}
 		} catch (BadCredentialsException e) {
-			//empty
+			// empty
 		}
 		return "redirect:/login/wrongPassword";
 	}
 
-	@RequestMapping(value = "logout", method = RequestMethod.GET)
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView logoutPage(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
@@ -104,15 +104,14 @@ public class ApplicationController {
 		return mav;
 	}
 
-	
-	@RequestMapping(value = { "register" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/register" }, method = RequestMethod.GET)
 	public String registerGet(Model model) {
-		if(!model.containsAttribute("register"))
+		if (!model.containsAttribute("register"))
 			model.addAttribute("register", new UserDataForm());
 		return "register";
 	}
 
-	@RequestMapping(value = { "register" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/register" }, method = RequestMethod.POST)
 	public String registerPost(@ModelAttribute UserDataForm form, Model model, BindingResult result) {
 
 		if (result.hasErrors()) {
@@ -124,7 +123,7 @@ public class ApplicationController {
 			model.addAttribute("register", form);
 			return "register";
 		}
-		
+
 		Optional<SpringUser> userCheck = userService.findById(form.getUsername());
 
 		if (!userCheck.isPresent()) {

@@ -1,4 +1,4 @@
-package example.com.dbauth.config;
+package example.com.dbauth.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;

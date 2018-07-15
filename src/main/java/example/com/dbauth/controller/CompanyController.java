@@ -1,12 +1,14 @@
-package example.com.dbauth.config;
+package example.com.dbauth.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import example.com.dbauth.auth.EmployeeRepository;
-import example.com.dbauth.auth.SalaryRepository;
+import example.com.dbauth.dao.EmployeeDAO;
+import example.com.dbauth.data.EmployeeRepository;
+import example.com.dbauth.data.SalaryRepository;
 import example.com.dbauth.entity.Employee;
 import example.com.dbauth.entity.Salary;
 import example.com.dbauth.entity.SalaryId;
@@ -37,7 +40,10 @@ public class CompanyController {
 	@Autowired
 	SalaryRepository salaryRepository;
 
-	@GetMapping("employee/{empNo}")
+	@Autowired
+	EmployeeDAO employeeDAO;
+
+	@GetMapping("/employee/{empNo}")
 	public ModelAndView employeeGet(@PathVariable String empNo) {
 		Optional<Employee> employeeOpt = employeeRepository.findById(Integer.valueOf(empNo));
 		if (employeeOpt.isPresent()) {
@@ -48,7 +54,7 @@ public class CompanyController {
 			return new ModelAndView("redirect:/employeeSearch/notFound/" + empNo);
 	}
 
-	@PostMapping("employee/{empNo}")
+	@PostMapping("/employee/{empNo}")
 	public String employeePost(@PathVariable String empNo, @ModelAttribute EmployeeForm employee, BindingResult result)
 			throws ParseException {
 
@@ -57,7 +63,7 @@ public class CompanyController {
 		return "redirect:/employeeSearch";
 	}
 
-	@GetMapping({ "employeeSearch", "employeeSearch/{message}/{incorrectNo}" })
+	@GetMapping({ "/employeeSearch", "/employeeSearch/{message}/{incorrectNo}" })
 	public ModelAndView employeeSearchGet(@PathVariable(required = false) String message,
 			@PathVariable(required = false) String incorrectNo) {
 
@@ -72,18 +78,19 @@ public class CompanyController {
 		return mav;
 	}
 
-	@PostMapping("employeeSearch")
-	public String employeeSearchPost(@ModelAttribute @Valid EmployeeSearchForm form, Model model, BindingResult bindingResult) {
+	@PostMapping("/employeeSearch")
+	public String employeeSearchPost(@ModelAttribute @Valid EmployeeSearchForm form, Model model,
+			BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("form",form);
+			model.addAttribute("form", form);
 			return "employeeSearch";
 		}
 
-		return "redirect:employee/" + form.getEmpNo();
+		return "redirect:/employee/" + form.getEmpNo();
 	}
 
-	@GetMapping("salary/{empNo}/{fromDate}")
+	@GetMapping("/salary/{empNo}/{fromDate}")
 	public ModelAndView salaryGet(@PathVariable String empNo, @PathVariable String fromDate)
 			throws NumberFormatException, ParseException {
 
@@ -97,10 +104,10 @@ public class CompanyController {
 			mav.getModel().put("salary", new SalaryForm(salaryOpt.get()));
 			return mav;
 		} else
-			return new ModelAndView("redirect:/salarySearch/notFound/" + empNo);
+			return new ModelAndView("redirect:/salarySearch/" + empNo + "/notFound");
 	}
 
-	@PostMapping("salary/{empNo}/{fromDate}")
+	@PostMapping("/salary/{empNo}/{fromDate}")
 	public String salaryPost(@PathVariable String empNo, @PathVariable String fromDate,
 			@ModelAttribute SalaryForm salary, BindingResult result) throws ParseException {
 
@@ -109,29 +116,60 @@ public class CompanyController {
 		return "redirect:/salarySearch";
 	}
 
-	@GetMapping({"salarySearch","salarySearch/{message}/{incorrectNo}"})
+	@GetMapping({ "/salarySearch", "/salarySearch/{id}", "/salarySearch/{id}/{message}" })
 	public ModelAndView salarySearchGet(@PathVariable(required = false) String message,
-			@PathVariable(required = false) String incorrectNo) {
+			@PathVariable(required = false) Integer id) {
 
 		ModelAndView mav = new ModelAndView();
 		if ("notFound".equals(message)) {
-			mav.getModel().put("notFound", "true");
-			mav.getModel().put("incorrectNo", incorrectNo);
+			mav.addObject("notFound", "true");
 		}
-	
-		mav.getModel().put("form", new SalarySearchForm());
+
+		mav.addObject("form", new SalarySearchForm());
+		mav.addObject("id", id);
 		mav.setViewName("salarySearch");
 		return mav;
 	}
-	
-	@PostMapping("salarySearch")
+
+	@PostMapping("/salarySearch")
 	public String salarySearchPost(@ModelAttribute SalarySearchForm form, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
 			return "salarySearch";
 		}
 
-		return "redirect:salary/" + form.getEmpNo() + "/" + form.getFromDate();
+		return "redirect:/salary/" + form.getEmpNo() + "/" + form.getFromDate();
 	}
 
+	@GetMapping("/elvis")
+	public ModelAndView listElvisEmployees() {
+		ModelAndView mav = new ModelAndView("elvis");
+		List<Employee> elvisList = employeeRepository.findByFirstNameContainingIgnoreCase("Elvis",
+				PageRequest.of(0, 1000));
+		mav.addObject("elvisList", elvisList);
+
+		return mav;
+	}
+
+	@GetMapping("/elvis/change")
+	public String changeElvisEmployeesGet() {
+		return "changeElvis";
+	}
+
+	@PostMapping("/elvis/change")
+	public String changeElvisEmployeesPost() {
+		employeeDAO.changeElvises();
+
+		return "redirect:/elvis";
+	}
+
+	@GetMapping("/employee/named/{firstName}/{lastName}")
+	public ModelAndView findEmployeesByNames(@PathVariable String firstName, @PathVariable String lastName) {
+		ModelAndView mav = new ModelAndView("employees");
+		List<Employee> list = employeeRepository.findByFirstNameAndLastName(firstName, lastName);
+		mav.getModel().put("list", list);
+		
+		return mav;
+	}
+	
 }

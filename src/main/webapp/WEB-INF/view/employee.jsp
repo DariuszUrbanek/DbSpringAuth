@@ -38,7 +38,7 @@
           <br/>
           <input type="submit" value="Save" />
           <br/>
-          <a href="/salarySearch">Go to salary search page.</a>
+          <a href="/salarySearch/${employee.empNo}">Go to salary search page.</a>
 
 
 

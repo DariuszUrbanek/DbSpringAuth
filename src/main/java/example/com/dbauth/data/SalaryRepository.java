@@ -1,4 +1,4 @@
-package example.com.dbauth.auth;
+package example.com.dbauth.data;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

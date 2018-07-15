@@ -12,14 +12,14 @@
       <br/>
 
       <c:if test="${notFound == 'true'}">
-        Can't find salary for specified "from date" for employee number: <c:out value = "${incorrectNo}"/><br/>     
+        Can't find salary for specified "from date" for employee number: <c:out value = "${id}"/><br/>     
         <br/>
       </c:if>
 
       <form:form method="post" action="/salarySearch" modelAttribute="form">
         <p1>Enter employee number:</p1>
         <br/>
-        <form:input path="empNo" value='<%=request.getParameter("empNo")%>'></form:input>
+        <form:input path="empNo" value="${id}"></form:input>
         <br/>
         <p1>From date:</p1><br/>
         <form:input path="fromDate"></form:input>

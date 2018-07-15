@@ -2,14 +2,19 @@ package example.com.dbauth.entity;
 
 import java.util.Date;
 
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+@NamedQuery(name = "employees.by.name", query="select e from Employee e where e.firstName = :firstName")
+@NamedNativeQuery(name = "employees.by.name.native", query = "select * from emp.dbo.employees where first_name = ?1", resultClass = Employee.class)
 @Entity
 @Table(name = "employees")
 @Access(AccessType.FIELD)
