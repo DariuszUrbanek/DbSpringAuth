@@ -82,7 +82,7 @@ public class ApplicationController {
 			Authentication resultAuthentication = authProvider.authenticate(authentication);
 			if (resultAuthentication.isAuthenticated()) {
 				SecurityContextHolder.getContext().setAuthentication(resultAuthentication);
-				return "redirect:/employeeSearch";
+				return "redirect:/home";
 			}
 		} catch (BadCredentialsException e) {
 			// empty

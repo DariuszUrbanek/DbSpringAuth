@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-  <%
-   String number = request.getParameter( "empNo" );
-   session.setAttribute( "theName", number );
-%>
+  <%   String number = request.getParameter( "empNo" );   session.setAttribute( "theName", number );%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 

@@ -14,22 +14,19 @@
 		action="/salary/${salary.empNo}/${salary.fromDate}"
 		modelAttribute="salary">
 		<h2>Salary details:</h2>
-		<p1>Employee number:</p1>
-		<br />
+		<p>Employee number:</p>
 		<form:input path="empNo" readonly="true"></form:input>
 		<br />
-		<p1>From date:</p1>
-		<br />
+		<p>From date:</p>
 		<form:input path="fromDate" readonly="true"></form:input>
 		<br />
-		<p1>To date:</p1>
-		<br />
+		<p>To date:</p>
 		<form:input path="toDate"></form:input>
 		<br />
-		<p1>Salary:</p1>
-		<br />
+		<p>Salary:</p>
 		<form:input path="salary"></form:input>
 		<br />
+		
 		<input type="submit" value="Save" />
 
 	</form:form>

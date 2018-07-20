@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import example.com.dbauth.dao.EmployeeDAO;
@@ -43,6 +45,12 @@ public class CompanyController {
 	@Autowired
 	EmployeeDAO employeeDAO;
 
+	@GetMapping("/home")
+	public String homePage() {		
+		
+		return "home";
+	}
+	
 	@GetMapping("/employee/{empNo}")
 	public ModelAndView employeeGet(@PathVariable String empNo) {
 		Optional<Employee> employeeOpt = employeeRepository.findById(Integer.valueOf(empNo));
