@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import example.com.dbauth.entity.Employee;
 import example.com.dbauth.form.EmployeeForm;
@@ -26,5 +27,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	List<Employee> findByLastName(String lastName);
 
 	List<Employee> findTop100By();
+
+	@Transactional
+	void deleteByEmpNo(Integer empNo);
 
 }

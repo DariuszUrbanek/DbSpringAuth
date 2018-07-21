@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.logging.log4j.util.Strings;
@@ -54,8 +55,8 @@ public class CompanyController {
 		return "home";
 	}
 
-	@GetMapping("/employee/{empNo}")
-	public ModelAndView employeeGet(@PathVariable String empNo) {
+	@GetMapping({"/employee/{empNo}","/employee/{empNo}/{success}"})
+	public ModelAndView employeeGet(@PathVariable String empNo, @PathVariable String success) {			
 		Optional<Employee> employeeOpt = employeeRepository.findById(Integer.valueOf(empNo));
 		if (employeeOpt.isPresent()) {
 			ModelAndView mav = new ModelAndView("employee");
@@ -63,6 +64,14 @@ public class CompanyController {
 			return mav;
 		} else
 			return new ModelAndView("redirect:/employeeSearch/notFound/" + empNo);
+	}
+	
+	@PostMapping("/employee")
+	public String employeePostGate(@ModelAttribute EmployeeForm employee, BindingResult result) throws ParseException {
+		
+		employeeRepository.save(employee.convertToEntity());
+
+		return "redirect:/employee/" + employee.getEmpNo() + "/success";
 	}
 
 	@PostMapping("/employee/{empNo}")
@@ -230,8 +239,20 @@ public class CompanyController {
 			}
 		}
 		mav.getModel().put("list", list);
+		
+		for(EmployeeForm employeeForm : list) {
+			mav.addObject(employeeForm.getEmpNo().toString(),employeeForm);
+		}
 
 		return mav;
+	}
+	
+	@PostMapping("/deleteEmployee/{empNo}")
+	public String deleteEmployeeGet(HttpServletRequest request, @PathVariable Integer empNo) {
+		
+		employeeRepository.deleteByEmpNo(empNo);
+		String referer = request.getHeader("Referer");
+	    return "redirect:"+ referer;		
 	}
 
 }

@@ -9,7 +9,7 @@
         <title>Spring Security Register</title>
     </head>
     <body>
-        <p style="font-size:20px;color:blue;font-weight:bold">Registration form:</span><br/>
+        <p style="font-size:20px;color:blue;font-weight:bold">Registration form:</p><br/>
         <br/>
         <br/>
 

@@ -12,27 +12,50 @@
 <body>
 	
 	<c:if test="${firstName == '*' && (lastName == '*' || lastName == null) }">
-		<span>List of first 100 employees:</span><br/>
+		<h2>List of first 100 employees:</h2><br/>
 	</c:if>
 	
 	<c:if test="${firstName != '*' && (lastName == '*' || lastName == null)}">
-		<span>List of employees with first name: "${firstName}"</span><br/>
+		<h2>List of employees with first name: "${firstName}"</h2><br/>
 	</c:if>
 
 	<c:if test="${firstName == '*' && (lastName != '*' && lastName != null)}">
-		<span>List of employees with last name: "${lastName}"</span><br/>
+		<h2>List of employees with last name: "${lastName}"</h2><br/>
 	</c:if>
 			
 	<c:if test="${firstName != '*' && (lastName != '*' && lastName != null)}">	
-		<span>List of employees with first name "${firstName}" and last name
-		"${lastName}" :</span><br/>			
+		<h2>List of employees with first name "${firstName}" and last name
+		"${lastName}" :</h2><br/>			
 	</c:if>	
+	
 
 	<c:forEach items="${list}" var="employee">
-		ID: <a href="/employee/${employee.empNo}">${employee.empNo}</a>, Birth date: ${employee.birthDate}, Hire date: ${employee.hireDate}, 
-		Name: ${employee.firstName}, Surname: ${employee.lastName} <br />
+	<table>
+		<tr>
+			<td>
+				<form:form style="display:inline" method="post" action="/employee" modelAttribute="${employee.empNo}">
+					ID: <a href="/employee/${employee.empNo}">${employee.empNo}</a>:
+					<form:hidden path="empNo" value="${employee.empNo}"/> 
+					Birth date:
+					<form:input path="birthDate"/> 
+					Hire date:
+					<form:input path="hireDate"/> 
+					Name:
+					<form:input path="firstName"/> 
+					Surname:
+					<form:input path="lastName"/>
+					<input type="submit" value="Save"/>			
+				</form:form> 
+			</td>
+			<td>
+				<form:form method="post" action="/deleteEmployee/${employee.empNo}">
+					<input type="submit" value="Delete"/>
+				</form:form>
+			</td>
+		</tr>		
+	</table>
+	
 	</c:forEach>
-
+	
 </body>
-
 </html>

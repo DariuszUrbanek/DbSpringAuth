@@ -8,9 +8,11 @@
         <title>Hello World!</title>
       </head>
 
-      <body>
+      <body>  
+      
         <form:form method="post" action="/employee/${employee.empNo}" modelAttribute="employee">
           <h2>Employee details:</h2>
+          <c:if test="${success == 'success'}"><h3 style="color:#32CD32; font-weight:bold">Employee ${employee.firstName} ${employee.lastName} saved successfully!</h3></c:if>
           <br/>
           <span>Employee number:</span><br/>       
           <form:input path="empNo" readonly="true"></form:input>
@@ -30,10 +32,8 @@
           <br/>
           <input type="submit" value="Save" />
           <br/>
+          <br/>
           <a href="/salarySearch/${employee.empNo}">Go to salary search page.</a>
-
-
-
         </form:form>
       </body>
 

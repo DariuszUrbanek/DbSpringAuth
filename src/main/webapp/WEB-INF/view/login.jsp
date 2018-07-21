@@ -13,17 +13,18 @@
 
 <body>
 	<p style="font-size: 20px; color: blue; font-weight: bold">Login
-		form:</span><br/>
+		form:</p><br/>
 	<br />
 
 	<c:if test="${registeredMessage == 'true'}">
-	Registered successfully, now you can login:<br />
-	</c:if>
+	Registered successfully, now you can login:<br /></c:if>
+	
 	<c:if test="${wrongLogin == 'true'}">
-    Wrong login,<a href="/register">register</a> if you didn't:<br />
-	</c:if>
-	<c:if test="${wrongPassword == 'true'}">Wrong password, try again.br />
-	</c:if>
+    Wrong login,<a href="/register">register</a> if you didn't:<br /></c:if>
+    
+	<c:if test="${wrongPassword == 'true'}">Wrong password, try again.<br /></c:if>
+	<br/>
+	
 	<form:form method="post" action="/login" modelAttribute="login">
 		<div>
 			<form:label path="username"> User Name : </form:label>

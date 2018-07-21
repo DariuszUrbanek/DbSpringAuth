@@ -23,10 +23,9 @@
 		<span>Enter employee number:</span><br/>
 		<form:input path="empNo"></form:input>
 		<form:errors path="empNo" style="color: red" />
-		<br />
+		<br /><br/>
 		<input type="submit" value="Search" />
 	</form:form>
-	<br />
 	<br/>
 	<a href="/employeeSearchByName">Search by name instead.</a>
 </body>

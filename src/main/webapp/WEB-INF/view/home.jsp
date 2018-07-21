@@ -8,8 +8,7 @@
 <body>
 
 	<h1>HOME:</h1>
-	<div>Select action:</div>
-	<br />
+	<h3 style="color:blue; font-weight:bold">Select action:</h3>
 	<a href="/employeeSearchByName">Search for employee by name</a>
 	<br/>
 	<br/>
