@@ -1,8 +1,7 @@
 package example.com.dbauth.form;
 
 public class EmployeeSearchForm {
-	
-//	@Min(5)
+
 	Integer empNo;
 
 	public Integer getEmpNo() {

@@ -12,24 +12,19 @@
         <form:form method="post" action="/employee/${employee.empNo}" modelAttribute="employee">
           <h2>Employee details:</h2>
           <br/>
-          <p1>Employee number:</p1>
-          <br/>
+          <span>Employee number:</span><br/>       
           <form:input path="empNo" readonly="true"></form:input>
           <br/>
-          <p1>First name:</p1>
-          <br/>
+          <span>First name:</span><br/>         
           <form:input path="firstName"></form:input>
           <br/>
-          <p1>Last name:</p1>
-          <br/>
+          <span>Last name:</span><br/>          
           <form:input path="lastName"></form:input>
           <br/>
-          <p1>Birth date:</p1>
-          <br/>
+          <span>Birth date:</span><br/>          
           <form:input path="birthDate"></form:input>
           <br/>
-          <p1>Hire date:</p1>
-          <br/>
+          <span>Hire date:</span><br/>          
           <form:input path="hireDate"></form:input>
           <br/>
           <br/>

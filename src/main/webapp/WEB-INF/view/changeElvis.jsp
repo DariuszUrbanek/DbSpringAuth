@@ -9,7 +9,7 @@
 
 <body>
 
-	<p>Change Elvis to Elvis2 and Elvis2 to Elvis</p>
+	<span>Change Elvis to Elvis2 and Elvis2 to Elvis</p>
 
 	<form:form method="post" action="/elvis/change">
 		<input type="submit" value="Change" />

@@ -10,7 +10,10 @@
 	<h1>HOME:</h1>
 	<div>Select action:</div>
 	<br />
-	<a href="/employeeSearch">Search for employee</a>
+	<a href="/employeeSearchByName">Search for employee by name</a>
+	<br/>
+	<br/>
+	<a href="/employeeSearch">Search for employee by ID</a>
 	<br />
 	<br />
 	<a href="/salarySearch">Search for salary of employee</a>
@@ -21,6 +24,7 @@
 	<br />
 	<a href="/register">Go to register page</a>
 	<br />
+	
 
 </body>
 </html>

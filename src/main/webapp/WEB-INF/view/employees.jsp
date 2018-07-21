@@ -10,9 +10,23 @@
 </head>
 
 <body>
+	
+	<c:if test="${firstName == '*' && (lastName == '*' || lastName == null) }">
+		<span>List of first 100 employees:</span><br/>
+	</c:if>
+	
+	<c:if test="${firstName != '*' && (lastName == '*' || lastName == null)}">
+		<span>List of employees with first name: "${firstName}"</span><br/>
+	</c:if>
 
-	<p>List of employees with first name "${firstName}" and last name
-		"${lastName}" :</p>
+	<c:if test="${firstName == '*' && (lastName != '*' && lastName != null)}">
+		<span>List of employees with last name: "${lastName}"</span><br/>
+	</c:if>
+			
+	<c:if test="${firstName != '*' && (lastName != '*' && lastName != null)}">	
+		<span>List of employees with first name "${firstName}" and last name
+		"${lastName}" :</span><br/>			
+	</c:if>	
 
 	<c:forEach items="${list}" var="employee">
 		ID: <a href="/employee/${employee.empNo}">${employee.empNo}</a>, Birth date: ${employee.birthDate}, Hire date: ${employee.hireDate}, 

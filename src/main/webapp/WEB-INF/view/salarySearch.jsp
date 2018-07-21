@@ -17,16 +17,14 @@
       </c:if>
 
       <form:form method="post" action="/salarySearch" modelAttribute="form">
-        <p1>Enter employee number:</p1>
-        <br/>
+        <span>Enter employee number:</span><br/>
         <form:input path="empNo" value="${id}"></form:input>
         <br/>
-        <p1>From date:</p1><br/>
+        <span>From date:</span><br/>
         <form:input path="fromDate"></form:input>
-        <br/>
+        <br/>        
         <input type="submit" value="Search" />
       </form:form>
-
 
     </body>
 

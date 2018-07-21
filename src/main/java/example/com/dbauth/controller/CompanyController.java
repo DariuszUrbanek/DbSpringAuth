@@ -4,9 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.annotation.Secured;
@@ -28,6 +30,7 @@ import example.com.dbauth.entity.Employee;
 import example.com.dbauth.entity.Salary;
 import example.com.dbauth.entity.SalaryId;
 import example.com.dbauth.form.EmployeeForm;
+import example.com.dbauth.form.EmployeeSearchByNameForm;
 import example.com.dbauth.form.EmployeeSearchForm;
 import example.com.dbauth.form.SalaryForm;
 import example.com.dbauth.form.SalarySearchForm;
@@ -46,11 +49,11 @@ public class CompanyController {
 	EmployeeDAO employeeDAO;
 
 	@GetMapping("/home")
-	public String homePage() {		
-		
+	public String homePage() {
+
 		return "home";
 	}
-	
+
 	@GetMapping("/employee/{empNo}")
 	public ModelAndView employeeGet(@PathVariable String empNo) {
 		Optional<Employee> employeeOpt = employeeRepository.findById(Integer.valueOf(empNo));
@@ -90,12 +93,38 @@ public class CompanyController {
 	public String employeeSearchPost(@ModelAttribute @Valid EmployeeSearchForm form, Model model,
 			BindingResult bindingResult) {
 
-		if (bindingResult.hasErrors()) {
+		if (form.getEmpNo() == null || bindingResult.hasErrors()) {
 			model.addAttribute("form", form);
 			return "employeeSearch";
 		}
 
 		return "redirect:/employee/" + form.getEmpNo();
+	}
+
+	@GetMapping("/employeeSearchByName")
+	public ModelAndView employeeSearchByNameGet() {
+		ModelAndView mav = new ModelAndView("employeeSearchByName");
+		mav.addObject("form", new EmployeeSearchByNameForm());
+
+		return mav;
+	}
+
+	@PostMapping("/employeeSearchByName")
+	public String employeeSearchByNamePost(@ModelAttribute @Valid EmployeeSearchByNameForm form, Model model,
+			BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("form", form);
+			return "employeeSearchByName";
+		}
+
+		if (Strings.isBlank(form.getFirstName()))
+			form.setFirstName("*");
+		
+		if (Strings.isBlank(form.getLastName()))
+			form.setLastName("*");
+		
+		return "redirect:/employee/named/" + form.getFirstName() + "/" + form.getLastName();
 	}
 
 	@GetMapping("/salary/{empNo}/{fromDate}")
@@ -133,20 +162,24 @@ public class CompanyController {
 			mav.addObject("notFound", "true");
 		}
 
-		mav.addObject("form", new SalarySearchForm());
-		mav.addObject("id", id);
+		if(mav.getModel().get("form") == null) {
+			mav.addObject("form", new SalarySearchForm());
+			mav.addObject("id", id);
+		}
 		mav.setViewName("salarySearch");
 		return mav;
 	}
 
 	@PostMapping("/salarySearch")
-	public String salarySearchPost(@ModelAttribute SalarySearchForm form, BindingResult bindingResult) {
+	public ModelAndView salarySearchPost(@ModelAttribute SalarySearchForm form, BindingResult bindingResult) {
 
-		if (bindingResult.hasErrors()) {
-			return "salarySearch";
+		if (Strings.isBlank(form.getFromDate()) || Strings.isBlank(form.getEmpNo()) || bindingResult.hasErrors()) {
+			ModelAndView mav = new ModelAndView("salarySearch");
+			mav.addObject("form",form);
+			return mav;
 		}
 
-		return "redirect:/salary/" + form.getEmpNo() + "/" + form.getFromDate();
+		return new ModelAndView("redirect:/salary/" + form.getEmpNo() + "/" + form.getFromDate());
 	}
 
 	@GetMapping("/elvis")
@@ -171,13 +204,34 @@ public class CompanyController {
 		return "redirect:/elvis";
 	}
 
-	@GetMapping("/employee/named/{firstName}/{lastName}")
-	public ModelAndView findEmployeesByNames(@PathVariable String firstName, @PathVariable String lastName) {
+	@GetMapping({ "/employee/named/{firstName}/{lastName}", "/employee/named/{firstName}" })
+	public ModelAndView findEmployeesByNames(@PathVariable String firstName,
+			@PathVariable(required = false) String lastName) {
+		if (lastName == null)
+			lastName = "*";
+
 		ModelAndView mav = new ModelAndView("employees");
-		List<Employee> list = employeeRepository.findByFirstNameAndLastName(firstName, lastName);
+		List<EmployeeForm> list;
+
+		if ("*".equals(firstName)) {
+			if ("*".equals(lastName)) {
+				list = employeeRepository.findTop100By().stream().map(EmployeeForm::new).collect(Collectors.toList());
+			} else {
+				list = employeeRepository.findByLastName(lastName).stream().map(EmployeeForm::new)
+						.collect(Collectors.toList());
+			}
+		} else {
+			if ("*".equals(lastName)) {
+				list = employeeRepository.findByFirstName(firstName).stream().map(EmployeeForm::new)
+						.collect(Collectors.toList());
+			} else {
+				list = employeeRepository.findByFirstNameAndLastName(firstName, lastName).stream()
+						.map(EmployeeForm::new).collect(Collectors.toList());
+			}
+		}
 		mav.getModel().put("list", list);
-		
+
 		return mav;
 	}
-	
+
 }

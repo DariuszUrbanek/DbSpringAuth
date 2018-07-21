@@ -13,7 +13,7 @@
 
 <body>
 	<p style="font-size: 20px; color: blue; font-weight: bold">Login
-		form:</p>
+		form:</span><br/>
 	<br />
 
 	<c:if test="${registeredMessage == 'true'}">
