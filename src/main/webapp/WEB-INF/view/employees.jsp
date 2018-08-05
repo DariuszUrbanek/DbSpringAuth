@@ -52,6 +52,11 @@
 					<input type="submit" value="Delete"/>
 				</form:form>
 			</td>
+			<td>
+				<form:form method="get" action="/salaries/${employee.empNo}">
+					<input type="submit" value="Salaries"/>
+				</form:form>
+			</td>
 		</tr>		
 	</table>
 	

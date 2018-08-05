@@ -11,7 +11,7 @@
 
 <body>
 
-	<span>List of employees with first name Elvis:</p>
+	<span>List of employees with first name Elvis:</span>
 
 	<c:forEach items="${elvisList}" var="elvis">
 		${elvis.firstName} ${elvis.lastName} <br />

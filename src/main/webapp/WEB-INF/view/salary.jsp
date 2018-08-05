@@ -10,11 +10,15 @@
 </head>
 
 <body>
+
+	
+
 	<form:form method="post"
 		action="/salary/${salary.empNo}/${salary.fromDate}"
 		modelAttribute="salary">
 		<h2>Salary details:</h2>
-		<span>Employee number:</span><br/>
+		<c:if test="${success == 'success'}"><h3 style="color:#32CD32; font-weight:bold">Salary saved successfully!</h3></c:if>
+       	<span>Employee number:</span><br/>
 		<form:input path="empNo" readonly="true"></form:input>
 		<br />
 		<span>From date:</span><br/>

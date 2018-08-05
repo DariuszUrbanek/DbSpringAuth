@@ -9,8 +9,6 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name = "salaries")
 @Access(AccessType.FIELD)
@@ -18,10 +16,10 @@ public class Salary {
 
 	@EmbeddedId
 	public SalaryId id;
-	
-	@Column(name="salary")
+
+	@Column(name = "salary")
 	public Integer salary;
-	
+
 	@Column(name = "to_date")
 	public Date toDate;
 
@@ -48,5 +46,5 @@ public class Salary {
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
 	}
-	
+
 }

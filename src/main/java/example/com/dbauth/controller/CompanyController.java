@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import example.com.dbauth.dao.EmployeeDAO;
@@ -35,6 +33,7 @@ import example.com.dbauth.form.EmployeeSearchByNameForm;
 import example.com.dbauth.form.EmployeeSearchForm;
 import example.com.dbauth.form.SalaryForm;
 import example.com.dbauth.form.SalarySearchForm;
+import example.com.dbauth.util.DateContainer;
 
 @Controller
 @Secured({ "ROLE_USER", "ROLE_ADMIN" })
@@ -55,8 +54,8 @@ public class CompanyController {
 		return "home";
 	}
 
-	@GetMapping({"/employee/{empNo}","/employee/{empNo}/{success}"})
-	public ModelAndView employeeGet(@PathVariable String empNo, @PathVariable String success) {			
+	@GetMapping({ "/employee/{empNo}", "/employee/{empNo}/{success}" })
+	public ModelAndView employeeGet(@PathVariable String empNo, @PathVariable(required = false) String success) {
 		Optional<Employee> employeeOpt = employeeRepository.findById(Integer.valueOf(empNo));
 		if (employeeOpt.isPresent()) {
 			ModelAndView mav = new ModelAndView("employee");
@@ -65,10 +64,10 @@ public class CompanyController {
 		} else
 			return new ModelAndView("redirect:/employeeSearch/notFound/" + empNo);
 	}
-	
+
 	@PostMapping("/employee")
 	public String employeePostGate(@ModelAttribute EmployeeForm employee, BindingResult result) throws ParseException {
-		
+
 		employeeRepository.save(employee.convertToEntity());
 
 		return "redirect:/employee/" + employee.getEmpNo() + "/success";
@@ -77,9 +76,7 @@ public class CompanyController {
 	@PostMapping("/employee/{empNo}")
 	public String employeePost(@PathVariable String empNo, @ModelAttribute EmployeeForm employee, BindingResult result)
 			throws ParseException {
-
 		employeeRepository.save(employee.convertToEntity());
-
 		return "redirect:/employeeSearch";
 	}
 
@@ -129,16 +126,16 @@ public class CompanyController {
 
 		if (Strings.isBlank(form.getFirstName()))
 			form.setFirstName("*");
-		
+
 		if (Strings.isBlank(form.getLastName()))
 			form.setLastName("*");
-		
+
 		return "redirect:/employee/named/" + form.getFirstName() + "/" + form.getLastName();
 	}
 
-	@GetMapping("/salary/{empNo}/{fromDate}")
-	public ModelAndView salaryGet(@PathVariable String empNo, @PathVariable String fromDate)
-			throws NumberFormatException, ParseException {
+	@GetMapping({ "/salary/{empNo}/{fromDate}", "/salary/{empNo}/{fromDate}/{success}" })
+	public ModelAndView salaryGet(@PathVariable String empNo, @PathVariable String fromDate,
+			@PathVariable String success) throws NumberFormatException, ParseException {
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -171,7 +168,7 @@ public class CompanyController {
 			mav.addObject("notFound", "true");
 		}
 
-		if(mav.getModel().get("form") == null) {
+		if (mav.getModel().get("form") == null) {
 			mav.addObject("form", new SalarySearchForm());
 			mav.addObject("id", id);
 		}
@@ -184,7 +181,7 @@ public class CompanyController {
 
 		if (Strings.isBlank(form.getFromDate()) || Strings.isBlank(form.getEmpNo()) || bindingResult.hasErrors()) {
 			ModelAndView mav = new ModelAndView("salarySearch");
-			mav.addObject("form",form);
+			mav.addObject("form", form);
 			return mav;
 		}
 
@@ -239,20 +236,53 @@ public class CompanyController {
 			}
 		}
 		mav.getModel().put("list", list);
-		
-		for(EmployeeForm employeeForm : list) {
-			mav.addObject(employeeForm.getEmpNo().toString(),employeeForm);
+
+		for (EmployeeForm employeeForm : list) {
+			mav.addObject(employeeForm.getEmpNo().toString(), employeeForm);
 		}
 
 		return mav;
 	}
-	
+
 	@PostMapping("/deleteEmployee/{empNo}")
-	public String deleteEmployeeGet(HttpServletRequest request, @PathVariable Integer empNo) {
-		
+	public String deleteEmployeePost(HttpServletRequest request, @PathVariable Integer empNo) {
+
 		employeeRepository.deleteByEmpNo(empNo);
 		String referer = request.getHeader("Referer");
-	    return "redirect:"+ referer;		
+		return "redirect:" + referer;
 	}
 
+	@GetMapping("/salaries/{empNo}")
+	public ModelAndView showSalariesGet(HttpServletRequest request, @PathVariable Integer empNo) {
+
+		ModelAndView mav = new ModelAndView();
+		List<SalaryForm> salaries = salaryRepository.findByIdEmpNo(empNo).stream().map(SalaryForm::new)
+				.collect(Collectors.toList());
+		mav.addObject("salaries", salaries);
+		mav.setViewName("salaries");
+		mav.addObject("employee", employeeRepository.findById(empNo).get());
+
+		for (SalaryForm salary : salaries) {
+			mav.addObject(salary.getFromDate(), salary);
+		}
+
+		return mav;
+	}
+
+	@PostMapping("/salary")
+	public String salaryPost(@ModelAttribute SalaryForm salary, BindingResult result) throws ParseException {
+
+		salaryRepository.save(salary.convertToEntity());
+
+		return "redirect:/salary/" + salary.getEmpNo() + "/" + salary.getFromDate() + "/success";
+	}
+	
+	@PostMapping("/deleteSalary/{empNo}/{fromDate}")
+	public String deleteSalaryFromDatePost(HttpServletRequest request, @PathVariable Integer empNo, @PathVariable String fromDate) throws ParseException {
+		
+		salaryRepository.deleteById(new SalaryId(empNo, DateContainer.valueOf(fromDate).date));
+		String referer = request.getHeader("Referer");
+		return "redirect:" + referer;
+	}
+	
 }
