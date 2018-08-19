@@ -52,7 +52,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Transactional
-	@Modifying
+	@Modifying // when using native query 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Employee> addModifyNameEmployeesNamedElvisAndReturnThem() {
@@ -62,7 +62,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	@Transactional // kiedy dokonujesz zmian w bazie danych
+	@Transactional // when you make changes to the database
 	public void changeElvises() {
 		List<Employee> elvisList = getByFirstName("Elvis");
 		List<Employee> elvis2List = getByFirstName("Elvis2");

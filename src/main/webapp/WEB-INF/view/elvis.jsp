@@ -11,12 +11,12 @@
 
 <body>
 
-	<span>List of employees with first name Elvis:</span>
+	<span>List of employees with first name Elvis:<br /></span>
 
 	<c:forEach items="${elvisList}" var="elvis">
-		${elvis.firstName} ${elvis.lastName} <br />
+		<br />${elvis.firstName} ${elvis.lastName} 
 	</c:forEach>
-	
+
 </body>
 
 </html>
