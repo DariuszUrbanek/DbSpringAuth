@@ -28,6 +28,8 @@
       </form:form>
       <br/>
       <a href="/employeeSearch">Search by ID instead.</a>
+	<br/><br/>
+	<a href="/home">HOME</a>
 
 
     </body>

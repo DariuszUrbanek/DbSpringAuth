@@ -28,6 +28,8 @@
 	</form:form>
 	<br/>
 	<a href="/employeeSearchByName">Search by name instead.</a>
+	<br/><br/>
+	<a href="/home">HOME</a>
 </body>
 
 

@@ -1,13 +1,12 @@
 package example.com.dbauth.form;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import javax.validation.constraints.NotEmpty;
-
 import example.com.dbauth.entity.Salary;
 import example.com.dbauth.entity.SalaryId;
 import example.com.dbauth.util.DateContainer;
+
+import javax.validation.constraints.NotEmpty;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class SalaryForm {
 
@@ -16,12 +15,12 @@ public class SalaryForm {
 	private String fromDate;
 		
 	@NotEmpty
-	public String salary;
+	private String salary;
 
 	@NotEmpty
-	public String toDate;
+	private String toDate;
 	
-	public DateContainer dateContainer;
+	private DateContainer dateContainer;
 
 	public SalaryForm() {
 

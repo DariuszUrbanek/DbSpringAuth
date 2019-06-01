@@ -25,9 +25,8 @@ public class CtoFService {
 	}
 
 	@GetMapping(value = "/{c}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Response convertCtoFfromInput(@PathVariable("c") Double c) {
+	public Response convertCtoFfromInput(@PathVariable("c") Double celsius) {
 		Double fahrenheit;
-		Double celsius = c;
 		fahrenheit = ((celsius * 9) / 5) + 32;
 		String result = "C to F Converter Output: " + fahrenheit;
 		Response response = new Response();

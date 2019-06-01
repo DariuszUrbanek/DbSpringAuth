@@ -25,6 +25,9 @@
         <br/>        
         <input type="submit" value="Search" />
       </form:form>
+      <br/>
+	  <br/>
+	  <a href="/home">HOME</a>
 
     </body>
 

@@ -1,14 +1,13 @@
 package example.com.dbauth.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
+import example.com.dbauth.dao.EmployeeDAO;
+import example.com.dbauth.data.EmployeeRepository;
+import example.com.dbauth.data.SalaryRepository;
+import example.com.dbauth.entity.Employee;
+import example.com.dbauth.entity.Salary;
+import example.com.dbauth.entity.SalaryId;
+import example.com.dbauth.form.*;
+import example.com.dbauth.util.DateContainer;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -22,31 +21,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import example.com.dbauth.dao.EmployeeDAO;
-import example.com.dbauth.data.EmployeeRepository;
-import example.com.dbauth.data.SalaryRepository;
-import example.com.dbauth.entity.Employee;
-import example.com.dbauth.entity.Salary;
-import example.com.dbauth.entity.SalaryId;
-import example.com.dbauth.form.EmployeeForm;
-import example.com.dbauth.form.EmployeeSearchByNameForm;
-import example.com.dbauth.form.EmployeeSearchForm;
-import example.com.dbauth.form.SalaryForm;
-import example.com.dbauth.form.SalarySearchForm;
-import example.com.dbauth.util.DateContainer;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @Secured({ "ROLE_USER", "ROLE_ADMIN" })
 public class CompanyController {
 
 	@Autowired
-	EmployeeRepository employeeRepository;
+	private EmployeeRepository employeeRepository;
 
 	@Autowired
-	SalaryRepository salaryRepository;
+	private SalaryRepository salaryRepository;
 
 	@Autowired
-	EmployeeDAO employeeDAO;
+	private EmployeeDAO employeeDAO;
 
 	@GetMapping("/home")
 	public String homePage() {

@@ -1,49 +1,41 @@
 package example.com.dbauth.config;
 
+import example.com.dbauth.dao.EmployeeDAO;
+import example.com.dbauth.data.EmployeeRepository;
+import example.com.dbauth.entity.Employee;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.FormLoginRequestBuilder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import example.com.dbauth.dao.EmployeeDAO;
-import example.com.dbauth.dao.EmployeeDAOImpl;
-import example.com.dbauth.data.EmployeeRepository;
-import example.com.dbauth.entity.Employee;
-
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ApplicationTests {
+
 	@Autowired
-	EmployeeRepository employeeRepository;
+	private EmployeeRepository employeeRepository;
 
 	@Autowired
 //	@Qualifier("EmployeeDaoImpl")
-	EmployeeDAO employeeDAO;
+	private EmployeeDAO employeeDAO;
 	
 	
-	// @Autowired
-	// private MockMvc mockMvc;
-	//
+//	 @Autowired
+//	 private MockMvc mockMvc;
+
 	// @Test
 	// public void loginWithValidUserThenAuthenticated() throws Exception {
 	// FormLoginRequestBuilder login = formLogin()
@@ -78,21 +70,18 @@ public class ApplicationTests {
 	// .andExpect(redirectedUrlPattern("**/login"));
 	// }
 	//
-	// @Test
-	// @WithMockUser
-	// public void accessSecuredResourceAuthenticatedThenOk() throws Exception {
-	// mockMvc.perform(get("/hello"))
-	// .andExpect(status().isOk());
-	// }
+//	 @Test
+//	 @WithMockUser
+//	 public void accessSecuredResourceAuthenticatedThenOk() throws Exception {
+//	 mockMvc.perform(get("/hello"))
+//	 .andExpect(status().isOk());
+//	 }
 
 	@Test
 	public void test() {
 		List<Employee> empList = employeeRepository.findByFirstNameAndLastName("Elvis", "Cardazo");
 		// Elvis Cardazo
-
 		empList.stream().forEach(e -> System.out.println(e.firstName + " " + e.lastName + ";"));
-
-		return;
 	}
 
 	@Test

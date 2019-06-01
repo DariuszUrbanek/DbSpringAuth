@@ -8,7 +8,7 @@ public class SalarySearchForm {
 	public String empNo;
 	
 	@NotEmpty
-	public String fromDate;
+	private String fromDate;
 
 	public String getEmpNo() {
 		return empNo;

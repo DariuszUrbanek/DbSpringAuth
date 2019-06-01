@@ -24,7 +24,7 @@ public class Application {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
-	public static void main(String[] args) throws Throwable {
+	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 

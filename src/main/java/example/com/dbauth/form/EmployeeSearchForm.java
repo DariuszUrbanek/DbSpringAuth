@@ -2,7 +2,7 @@ package example.com.dbauth.form;
 
 public class EmployeeSearchForm {
 
-	Integer empNo;
+	private Integer empNo;
 
 	public Integer getEmpNo() {
 		return empNo;

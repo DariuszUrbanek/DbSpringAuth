@@ -1,12 +1,9 @@
 package example.com.dbauth.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import example.com.dbauth.auth.RoleRepository;
+import example.com.dbauth.auth.UserDataForm;
+import example.com.dbauth.auth.UserRepository;
+import example.com.dbauth.entity.SpringUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,33 +16,34 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import example.com.dbauth.auth.RoleRepository;
-import example.com.dbauth.auth.UserDataForm;
-import example.com.dbauth.auth.UserRepository;
-import example.com.dbauth.entity.SpringUser;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class ApplicationController {
 
 	@Autowired
-	UserRepository userService;
+	private UserRepository userService;
 
 	@Autowired
-	RoleRepository roleRepository;
+	private RoleRepository roleRepository;
 
 	@Autowired
-	UserDetailsService userDetailsService;
+	private UserDetailsService userDetailsService;
 
 	@Autowired
-	DaoAuthenticationProvider authProvider;
+	private DaoAuthenticationProvider authProvider;
 
-	@RequestMapping(value = { "/", "/login", "/login/{message}" }, method = RequestMethod.GET)
+	@GetMapping(value = { "/", "/login", "/login/{message}" })
 	public String loginGet(Model model, @PathVariable(required = false) String message) {
 		if (message != null && !message.isEmpty())
 			switch (message) {
@@ -65,7 +63,7 @@ public class ApplicationController {
 		return "login";
 	}
 
-	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
+	@PostMapping(value = { "/login" })
 	public String loginPost(@ModelAttribute UserDataForm login, BindingResult result) {
 
 		if (result.hasErrors())
@@ -85,12 +83,12 @@ public class ApplicationController {
 				return "redirect:/home";
 			}
 		} catch (BadCredentialsException e) {
-			// empty
+			throw e;
 		}
 		return "redirect:/login/wrongPassword";
 	}
 
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@GetMapping(value = "/logout")
 	public ModelAndView logoutPage(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
@@ -104,14 +102,14 @@ public class ApplicationController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/register" }, method = RequestMethod.GET)
+	@GetMapping(value = { "/register" })
 	public String registerGet(Model model) {
 		if (!model.containsAttribute("register"))
 			model.addAttribute("register", new UserDataForm());
 		return "register";
 	}
 
-	@RequestMapping(value = { "/register" }, method = RequestMethod.POST)
+	@PostMapping(value = { "/register" })
 	public String registerPost(@ModelAttribute UserDataForm form, Model model, BindingResult result) {
 
 		if (result.hasErrors()) {

@@ -2,9 +2,9 @@ package example.com.dbauth.form;
 
 public class EmployeeSearchByNameForm {
 
-	String firstName;
+	private String firstName;
 	
-	String lastName;
+	private String lastName;
 
 	public String getFirstName() {
 		return firstName;
@@ -21,7 +21,4 @@ public class EmployeeSearchByNameForm {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
-
-
 }
