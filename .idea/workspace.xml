@@ -418,16 +418,16 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ApplicationTests">
+  <component name="RunManager" selected="Application.Application">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="example.com.dbauth.config.Application" />
+      <option name="MAIN_CLASS_NAME" value="example.com.dbauth.Application" />
       <module name="db-spring-auth" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="example.com.dbauth.config.*" />
+          <option name="PATTERN" value="example.com.dbauth.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -439,7 +439,7 @@
       <module name="db-spring-auth" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="example.com.dbauth.config.*" />
+          <option name="PATTERN" value="example.com.dbauth.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -462,7 +462,7 @@
       <module name="db-spring-auth" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="example.com.dbauth.config.*" />
+          <option name="PATTERN" value="example.com.dbauth.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -485,7 +485,7 @@
       <module name="db-spring-auth" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="example.com.dbauth.config.*" />
+          <option name="PATTERN" value="example.com.dbauth.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -550,8 +550,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ApplicationTests" />
         <item itemvalue="Application.Application" />
+        <item itemvalue="JUnit.ApplicationTests" />
         <item itemvalue="JUnit.ApplicationTests.test" />
         <item itemvalue="JUnit.ApplicationTests.accessSecuredResourceAuthenticatedThenOk" />
       </list>

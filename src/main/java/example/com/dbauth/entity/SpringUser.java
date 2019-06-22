@@ -14,6 +14,4 @@ public class SpringUser {
 
     @ManyToMany
     public List<SpringRole> roles;
-
-
 }

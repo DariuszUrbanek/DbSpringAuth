@@ -1,4 +1,4 @@
-package example.com.dbauth.config;
+package example.com.dbauth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
