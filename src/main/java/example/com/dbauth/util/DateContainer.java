@@ -17,7 +17,6 @@ public class DateContainer {
         SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         return sdFormat.format(date);
-
     }
 
     public static DateContainer valueOf(String dateString) throws ParseException {

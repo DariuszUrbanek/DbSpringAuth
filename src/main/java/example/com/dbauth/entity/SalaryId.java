@@ -1,8 +1,5 @@
 package example.com.dbauth.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,8 +7,6 @@ import java.util.Date;
 @Embeddable
 @Table(name = "salaries")
 @Access(AccessType.FIELD)
-@Getter
-@Setter
 public class SalaryId implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -27,6 +22,22 @@ public class SalaryId implements Serializable {
     public SalaryId(Integer empNo, Date fromDate) {
         super();
         this.empNo = empNo;
+        this.fromDate = fromDate;
+    }
+
+    public Integer getEmpNo() {
+        return empNo;
+    }
+
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public void setEmpNo(Integer empNo) {
+        this.empNo = empNo;
+    }
+
+    public void setFromDate(Date fromDate) {
         this.fromDate = fromDate;
     }
 

@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface SalaryRepository extends JpaRepository<Salary, SalaryId> {
 
-
     @Query("select s from Salary s where s.id.empNo = :empNo")
     List<Salary> findByIdEmpNo(@Param("empNo") Integer empNo);
 
