@@ -110,12 +110,7 @@ public class ApplicationController {
     }
 
     @PostMapping(value = {"/register"})
-    public String registerPost(@ModelAttribute UserDataForm form, Model model, BindingResult result) {
-
-        if (result.hasErrors()) {
-            model.addAttribute("register", form);
-            return "register";
-        }
+    public String registerPost(@ModelAttribute UserDataForm form, Model model) {
 
         if (!form.getPassword().equals(form.getPasswordRepeated())) {
             model.addAttribute("register", form);
