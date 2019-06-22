@@ -1,7 +1,10 @@
 package example.com.dbauth.form;
 
+import lombok.Data;
+
 import javax.validation.constraints.NotEmpty;
 
+@Data
 public class SalarySearchForm {
 
     @NotEmpty
@@ -9,21 +12,4 @@ public class SalarySearchForm {
 
     @NotEmpty
     private String fromDate;
-
-    public String getEmpNo() {
-        return empNo;
-    }
-
-    public void setEmpNo(String empNo) {
-        this.empNo = empNo;
-    }
-
-    public String getFromDate() {
-        return fromDate;
-    }
-
-    public void setFromDate(String fromDate) {
-        this.fromDate = fromDate;
-    }
-
 }
