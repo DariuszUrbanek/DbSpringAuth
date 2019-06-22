@@ -10,81 +10,81 @@ import java.text.SimpleDateFormat;
 
 public class SalaryForm {
 
-	private String empNo;
-	
-	private String fromDate;
-		
-	@NotEmpty
-	private String salary;
+    private String empNo;
 
-	@NotEmpty
-	private String toDate;
-	
-	private DateContainer dateContainer;
+    private String fromDate;
 
-	public SalaryForm() {
+    @NotEmpty
+    private String salary;
 
-	}
+    @NotEmpty
+    private String toDate;
 
-	public SalaryForm(Salary salary) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
-		this.empNo = salary.id.getEmpNo().toString();
-		this.fromDate = dateFormat.format(salary.id.getFromDate());
-		this.salary = salary.salary.toString();
-		this.toDate = dateFormat.format(salary.toDate);
-		this.dateContainer = new DateContainer(salary.id.getFromDate());
-	}
+    private DateContainer dateContainer;
 
-	public Salary convertToEntity() throws ParseException {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public SalaryForm() {
 
-		Salary target = new Salary();
-		target.id = new SalaryId(Integer.valueOf(empNo), dateFormat.parse(fromDate));
-		target.salary = Integer.valueOf(salary);
-		target.toDate = dateFormat.parse(toDate);
+    }
 
-		return target;
-	}
+    public SalaryForm(Salary salary) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-	public String getEmpNo() {
-		return empNo;
-	}
+        this.empNo = salary.id.getEmpNo().toString();
+        this.fromDate = dateFormat.format(salary.id.getFromDate());
+        this.salary = salary.salary.toString();
+        this.toDate = dateFormat.format(salary.toDate);
+        this.dateContainer = new DateContainer(salary.id.getFromDate());
+    }
 
-	public void setEmpNo(String empNo) {
-		this.empNo = empNo;
-	}
+    public Salary convertToEntity() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-	public String getFromDate() {
-		return fromDate;
-	}
+        Salary target = new Salary();
+        target.id = new SalaryId(Integer.valueOf(empNo), dateFormat.parse(fromDate));
+        target.salary = Integer.valueOf(salary);
+        target.toDate = dateFormat.parse(toDate);
 
-	public void setFromDate(String fromDate) {
-		this.fromDate = fromDate;
-	}
+        return target;
+    }
 
-	public String getSalary() {
-		return salary;
-	}
+    public String getEmpNo() {
+        return empNo;
+    }
 
-	public void setSalary(String salary) {
-		this.salary = salary;
-	}
+    public void setEmpNo(String empNo) {
+        this.empNo = empNo;
+    }
 
-	public String getToDate() {
-		return toDate;
-	}
+    public String getFromDate() {
+        return fromDate;
+    }
 
-	public void setToDate(String toDate) {
-		this.toDate = toDate;
-	}
+    public void setFromDate(String fromDate) {
+        this.fromDate = fromDate;
+    }
 
-	public DateContainer getDateContainer() {
-		return dateContainer;
-	}
+    public String getSalary() {
+        return salary;
+    }
 
-	public void setDateContainer(DateContainer dateContainer) {
-		this.dateContainer = dateContainer;
-	}
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+    public String getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(String toDate) {
+        this.toDate = toDate;
+    }
+
+    public DateContainer getDateContainer() {
+        return dateContainer;
+    }
+
+    public void setDateContainer(DateContainer dateContainer) {
+        this.dateContainer = dateContainer;
+    }
 
 }

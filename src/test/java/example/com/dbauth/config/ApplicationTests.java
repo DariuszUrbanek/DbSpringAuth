@@ -106,7 +106,7 @@ public class ApplicationTests {
 	}
 	
 	@Test
-	public void testContains() throws ParseException {
+	public void testContains() {
 		List<Employee> empList;
 		int page = 1;
 		while ((empList = employeeRepository.findByFirstNameContainingIgnoreCase("dant", PageRequest.of(page++, 5))).size() > 0) {

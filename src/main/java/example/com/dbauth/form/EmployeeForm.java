@@ -1,95 +1,94 @@
 package example.com.dbauth.form;
 
+import example.com.dbauth.entity.Employee;
+
+import javax.validation.constraints.NotEmpty;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.validation.constraints.NotEmpty;
-
-import example.com.dbauth.entity.Employee;
-
 public class EmployeeForm {
-	
-	public Integer empNo;
 
-	@NotEmpty
-	public String birthDate;
+    public Integer empNo;
 
-	@NotEmpty
-	public String firstName;
+    @NotEmpty
+    public String birthDate;
 
-	@NotEmpty
-	public String lastName;
+    @NotEmpty
+    public String firstName;
 
-	@NotEmpty
-	public String hireDate;
+    @NotEmpty
+    public String lastName;
 
-	public EmployeeForm() {
-	}
-	
-	public EmployeeForm(Employee source) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
-		this.empNo = source.empNo;		
-		this.birthDate = dateFormat.format(source.birthDate);
-		this.firstName = source.firstName;
-		this.lastName = source.lastName;
-		this.hireDate = dateFormat.format(source.hireDate);
-		
-	}
-	
-	public Employee convertToEntity() throws ParseException {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    @NotEmpty
+    public String hireDate;
 
-		Employee target = new Employee();
-		target.birthDate = dateFormat.parse(birthDate);
-		target.empNo = empNo;
-		target.firstName = firstName;
-		target.hireDate = dateFormat.parse(hireDate);
-		target.lastName = lastName;
-		
-		return target;
-		
-	}
-	
-	public Integer getEmpNo() {
-		return empNo;
-	}
+    public EmployeeForm() {
+    }
 
-	public void setEmpNo(Integer empNo) {
-		this.empNo = empNo;
-	}
+    public EmployeeForm(Employee source) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-	public String getBirthDate() {
-		return birthDate;
-	}
+        this.empNo = source.empNo;
+        this.birthDate = dateFormat.format(source.birthDate);
+        this.firstName = source.firstName;
+        this.lastName = source.lastName;
+        this.hireDate = dateFormat.format(source.hireDate);
 
-	public void setBirthDate(String birthDate) {
-		this.birthDate = birthDate;
-	}
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public Employee convertToEntity() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+        Employee target = new Employee();
+        target.birthDate = dateFormat.parse(birthDate);
+        target.empNo = empNo;
+        target.firstName = firstName;
+        target.hireDate = dateFormat.parse(hireDate);
+        target.lastName = lastName;
 
-	public String getLastName() {
-		return lastName;
-	}
+        return target;
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    }
 
-	public String getHireDate() {
-		return hireDate;
-	}
+    public Integer getEmpNo() {
+        return empNo;
+    }
 
-	public void setHireDate(String hireDate) {
-		this.hireDate = hireDate;
-	}
+    public void setEmpNo(Integer empNo) {
+        this.empNo = empNo;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(String hireDate) {
+        this.hireDate = hireDate;
+    }
 
 
 }

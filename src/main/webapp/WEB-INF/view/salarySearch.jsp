@@ -4,7 +4,7 @@
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
     <head>
-      <title>Spring Salary Search</title>
+      <title>Salary Search</title>
     </head>
 
     <body>
@@ -14,7 +14,7 @@
       <c:if test="${notFound == 'true'}">
         Can't find salary for specified "from date" for employee number: <c:out value = "${id}"/><br/>     
         <br/>
-      </c:if>
+      </c:if>ó
 
       <form:form method="post" action="/salarySearch" modelAttribute="form">
         <span>Enter employee number:</span><br/>

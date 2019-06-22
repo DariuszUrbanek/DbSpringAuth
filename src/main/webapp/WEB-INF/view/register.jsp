@@ -8,6 +8,7 @@
     <head>
         <title>Spring Security Register</title>
     </head>
+
     <body>
         <p style="font-size:20px;color:blue;font-weight:bold">Registration form:</p><br/>
         <br/>
@@ -19,7 +20,7 @@
 	            <form:input name="username" path="username" id="username"/>
 	            <form:errors path="username" style="color: red"/>
             </div>
-            <div>
+            <div>ó
 	            <form:label path="password"> Password: </form:label>
 	            <form:password name="password" path="password" id="password"/>
 	            <form:errors path="password" style="color: red"/>

@@ -6,12 +6,10 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
-<title>Spring Salary</title>
+    <title>Salary</title>
 </head>
 
 <body>
-
-	
 
 	<form:form method="post"
 		action="/salary/${salary.empNo}/${salary.fromDate}"
@@ -32,8 +30,8 @@
 		<br />
 		
 		<input type="submit" value="Save" />
-
 	</form:form>
+
 </body>
 
 </html>

@@ -6,18 +6,17 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
-<title>Addition</title>
+    <title>Multiply</title>
 </head>
 
 <body>
+
 	<h1>RESULT</h1>
 	<c:out value="${number1}"></c:out>
 	*
 	<c:out value="${number2}"></c:out>
 	=
 	<c:out value="${result}"></c:out>
-
-
 
 </body>
 
