@@ -14,7 +14,7 @@
       <c:if test="${notFound == 'true'}">
         Can't find salary for specified "from date" for employee number: <c:out value = "${id}"/><br/>     
         <br/>
-      </c:if>ó
+      </c:if>
 
       <form:form method="post" action="/salarySearch" modelAttribute="form">
         <span>Enter employee number:</span><br/>

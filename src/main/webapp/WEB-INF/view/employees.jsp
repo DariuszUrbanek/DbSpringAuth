@@ -6,7 +6,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
-<title>Elvis list</title>
+    <title>Employees</title>
 </head>
 
 <body>

@@ -6,7 +6,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
-<title>Spring Employee Search</title>
+<title>Employee Search</title>
 </head>
 
 <body>

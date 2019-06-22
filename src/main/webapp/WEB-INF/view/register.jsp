@@ -6,7 +6,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
-        <title>Spring Security Register</title>
+        <title>Register</title>
     </head>
 
     <body>
@@ -20,7 +20,7 @@
 	            <form:input name="username" path="username" id="username"/>
 	            <form:errors path="username" style="color: red"/>
             </div>
-            <div>ó
+            <div>
 	            <form:label path="password"> Password: </form:label>
 	            <form:password name="password" path="password" id="password"/>
 	            <form:errors path="password" style="color: red"/>

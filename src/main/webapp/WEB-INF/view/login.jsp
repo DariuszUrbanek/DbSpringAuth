@@ -1,39 +1,39 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html;charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
-<title>Spring Security Login</title>
+    <title>Login</title>
 </head>
 
 <body>
-	<p style="font-size: 20px; color: blue; font-weight: bold">Login
-		form:</p><br/>
-	<br />
+	Language : <a href="?language=en">English</a> |  <a href="?language=pl">Polish</a></br>
+	<p style="font-size: 20px; color: blue; font-weight: bold"><spring:message code="login.text" /></p><br/>
 
 	<c:if test="${registeredMessage == 'true'}">
-	Registered successfully, now you can login:<br /></c:if>
+	<spring:message code="registered.text" /><br /></c:if>
 	
 	<c:if test="${wrongLogin == 'true'}">
     Wrong login,<a href="/register">register</a> if you didn't:<br /></c:if>
     
-	<c:if test="${wrongPassword == 'true'}">Wrong password, try again.<br /></c:if>
+	<c:if test="${wrongPassword == 'true'}"><spring:message code="wrongPassword.text" /><br /></c:if>
 	<br/>
 	
 	<form:form method="post" action="/login" modelAttribute="login">
 		<div>
-			<form:label path="username"> User Name : </form:label>
+			<form:label path="username"> <spring:message code="userName.text" /></form:label>
 			<br />
 			<form:input name="username" path="username" id="username" />
 			<form:errors path="username" style="color: red" />
 		</div>
 		<div>
-			<form:label path="password"> Password: </form:label>
+			<form:label path="password"> <spring:message code="password.text" /></form:label>
 			<br />
 			<form:password name="password" path="password" id="password" />
 			<form:errors path="password" style="color: red" />
