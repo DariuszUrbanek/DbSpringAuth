@@ -21,13 +21,13 @@
 
           <form:form method="post" action="/employeeSearchByName" modelAttribute="form">
             <span><spring:message code="enterEmployeeName.text" /></span><br/>
-            <spring:message code="firstName.text" />
+            <spring:message code="firstName.text" /><br />
             <form:input path="firstName"></form:input>
             <br/>
-            <spring:message code="lastName.text" />
+            <spring:message code="lastName.text" /><br />
             <form:input path="lastName"></form:input>
-            <br/>
-            <input type="submit" value="Search" />
+            <br/><br />
+            <input type="submit" value=<spring:message code="search.text" /> />
             <br/>
           </form:form>
           <br/>

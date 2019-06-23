@@ -18,12 +18,10 @@ public class ErrorControllerImpl implements ErrorController {
             default:
                 return "error";
         }
-
     }
 
     @Override
     public String getErrorPath() {
         return "/error";
     }
-
 }

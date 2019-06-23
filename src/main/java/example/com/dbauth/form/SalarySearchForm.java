@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 public class SalarySearchForm {
 
     @NotEmpty
-    public String empNo;
+    private String empNo;
 
     @NotEmpty
     private String fromDate;

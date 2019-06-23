@@ -3,11 +3,13 @@ package example.com.dbauth.form;
 import example.com.dbauth.entity.Salary;
 import example.com.dbauth.entity.SalaryId;
 import example.com.dbauth.util.DateContainer;
+import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+@Data
 public class SalaryForm {
 
     private String empNo;
@@ -23,7 +25,6 @@ public class SalaryForm {
     private DateContainer dateContainer;
 
     public SalaryForm() {
-
     }
 
     public SalaryForm(Salary salary) {
@@ -46,45 +47,4 @@ public class SalaryForm {
 
         return target;
     }
-
-    public String getEmpNo() {
-        return empNo;
-    }
-
-    public void setEmpNo(String empNo) {
-        this.empNo = empNo;
-    }
-
-    public String getFromDate() {
-        return fromDate;
-    }
-
-    public void setFromDate(String fromDate) {
-        this.fromDate = fromDate;
-    }
-
-    public String getSalary() {
-        return salary;
-    }
-
-    public void setSalary(String salary) {
-        this.salary = salary;
-    }
-
-    public String getToDate() {
-        return toDate;
-    }
-
-    public void setToDate(String toDate) {
-        this.toDate = toDate;
-    }
-
-    public DateContainer getDateContainer() {
-        return dateContainer;
-    }
-
-    public void setDateContainer(DateContainer dateContainer) {
-        this.dateContainer = dateContainer;
-    }
-
 }

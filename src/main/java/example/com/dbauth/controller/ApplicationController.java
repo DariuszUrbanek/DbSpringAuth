@@ -66,8 +66,8 @@ public class ApplicationController {
     @PostMapping(value = {"/login"})
     public String loginPost(@ModelAttribute UserDataForm login, BindingResult result) {
 
-        if (result.hasErrors())
-            return "login";
+//        if (result.hasErrors())
+//            return "login";
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 login.getUsername(), login.getPassword());
@@ -83,7 +83,7 @@ public class ApplicationController {
                 return "redirect:/home";
             }
         } catch (BadCredentialsException e) {
-            throw e;
+            //Continue
         }
         return "redirect:/login/wrongPassword";
     }

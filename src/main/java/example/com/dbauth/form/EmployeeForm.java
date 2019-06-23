@@ -1,26 +1,28 @@
 package example.com.dbauth.form;
 
 import example.com.dbauth.entity.Employee;
+import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+@Data
 public class EmployeeForm {
 
-    public Integer empNo;
+    private Integer empNo;
 
     @NotEmpty
-    public String birthDate;
+    private String birthDate;
 
     @NotEmpty
-    public String firstName;
+    private String firstName;
 
     @NotEmpty
-    public String lastName;
+    private String lastName;
 
     @NotEmpty
-    public String hireDate;
+    private String hireDate;
 
     public EmployeeForm() {
     }
@@ -33,7 +35,6 @@ public class EmployeeForm {
         this.firstName = source.firstName;
         this.lastName = source.lastName;
         this.hireDate = dateFormat.format(source.hireDate);
-
     }
 
     public Employee convertToEntity() throws ParseException {
@@ -47,48 +48,5 @@ public class EmployeeForm {
         target.lastName = lastName;
 
         return target;
-
     }
-
-    public Integer getEmpNo() {
-        return empNo;
-    }
-
-    public void setEmpNo(Integer empNo) {
-        this.empNo = empNo;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getHireDate() {
-        return hireDate;
-    }
-
-    public void setHireDate(String hireDate) {
-        this.hireDate = hireDate;
-    }
-
-
 }
