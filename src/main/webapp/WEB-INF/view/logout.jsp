@@ -4,8 +4,9 @@
     <head>
         <title>Logout</title>
     </head>
+
     <body>
-    <c:out value="${user}"/>
+        <c:out value="${user}"/>
     	<h1>logged out!</h1>		    
     </body>
 </html>

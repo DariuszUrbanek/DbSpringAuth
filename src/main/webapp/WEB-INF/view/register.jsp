@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<html xmlns="http://www.w3.org/1999/xhtml"	xmlns:th="http://www.thymeleaf.org"	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
     <head>
         <title>Register</title>
     </head>
 
     <body>
-        <p style="font-size:20px;color:blue;font-weight:bold">Registration form:</p><br/>
-        <br/>
-        <br/>
+        <p style="font-size:20px;color:blue;font-weight:bold">Registration form:<br /><b /><b /></p>
 
         <form:form method="post" action="/register" modelAttribute="register">
             <div>
@@ -33,4 +30,5 @@
             <div><input type="submit" value="Register"/></div>
         </form:form>
     </body>
+
 </html>
