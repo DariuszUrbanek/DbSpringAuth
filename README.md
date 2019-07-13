@@ -5,4 +5,4 @@ Project uses Microsoft SQL Server, database model described in a "scripts.sql".
 
 
 * "base_branch" contains basic version of an application
-* "master" contains extended range of functionality
+* "experiments" contains extended range of functionality
