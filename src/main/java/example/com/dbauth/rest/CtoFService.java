@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/ctofservice")
 public class CtoFService {
 
+    
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public Response convertCtoF() {
         Double fahrenheit;
